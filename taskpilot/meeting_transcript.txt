@@ -1,0 +1,31 @@
+Speaker 1: Hi! How are you guys?
+Speaker 2: Good good!
+Speaker 3: Great!
+Speaker 2: What about you?
+Speaker 1: Fine as well! So let’s talk about the project, right? What’s the current status?
+Speaker 3: Sure. So, the API integration with the payment provider is about 80% done. I’ve already implemented most of the endpoints, and today I’m wrapping up the callback handling logic.
+Speaker 2: Nice. On my side, I’ve been working on the new dashboard UI. The structure is there, and the design matches the mockups, but I still need to connect the components to the actual backend data.
+Speaker 1: Okay. Are we on track to hit our sprint deadline next Wednesday?
+Speaker 2: Hmm, I’ll probably need until Tuesday to complete the data bindings and run the component tests. Should be doable.
+Speaker 3: I think I can finish the last bit of the API by tomorrow. Then I’ll shift to writing integration tests Monday morning.
+Speaker 1: Sounds good. I’d like to demo a working version internally Tuesday afternoon, so let’s make sure we have a stable build by then. Jason, can you finish the callback logic and get the tests in by EOD Monday?
+Speaker 3: Yes, that works. I’ll also do some manual testing before pushing anything.
+Speaker 1: Perfect. And Sara, make sure your changes are merged by Tuesday morning so we can test the full flow.
+Speaker 2: Got it. I’ll block off some time Monday morning to do QA on my end as well.
+Speaker 1: Alright. I’ll also prepare the internal slide deck for the demo, and I’ll reach out to Legal today to double-check the terms of use for the payment provider integration.
+Speaker 3: Do you want us to document the new API structure anywhere?
+Speaker 1: Yes, definitely. Could you add a page to the internal Confluence, Jason?
+Speaker 3: Sure. I’ll draft it after I wrap up the integration tests Monday afternoon.
+Speaker 2: I can update the UI component guide on Notion once I finish wiring everything. Might be Tuesday morning, but I’ll try to get it done by end of day Monday.
+Speaker 1: That works. Also, any blockers or dependencies we need to flag?
+Speaker 2: The only thing is the backend schema for the new analytics data. I think it’s still not finalized?
+Speaker 3: Yeah, I talked to Mike yesterday. He said it should be updated in staging by Friday.
+Speaker 1: Alright, I’ll follow up with him today and make sure that gets done. We can’t test the full dashboard without it.
+Speaker 3: One more thing — do we have confirmation that QA will be available Tuesday for final testing?
+Speaker 1: I booked a slot with them already. They’re expecting a handover Tuesday morning.
+Speaker 2: Cool. That gives us a bit of buffer.
+Speaker 1: Great. Let’s plan a quick sync Tuesday at 10 a.m. before the demo just to make sure everything’s in place.
+Speaker 2: Works for me.
+Speaker 3: Same here.
+Speaker 1: Awesome. Let’s stay on top of those tasks and let me know immediately if anything gets blocked. Thanks everyone!
+
