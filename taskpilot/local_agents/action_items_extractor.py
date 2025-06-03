@@ -14,8 +14,8 @@ The action items should contain the following information:
     - description: The description of the action item. It should be a more extended description of the action item. This is mandatory.
     - assignee: The person who will be responsible for the action item. This is mandatory.
     - status: The status of the action item. It can be "To Do", "In Progress", "In Review" or "Done". You shall extract from the transcript in which state the action item is. If it is a new action item, you shall set it to "To Do".
-    - due_date: The due date of the action item. You shall extract this from the transcript, however if it is not explicitly mentioned, you shall set it to None.
-    - start_date: The start date of the action item. You shall extract this from the transcript, however if it is not explicitly mentioned, you shall set it to None.
+    - due_date: The due date of the action item. It shall be in the format "YYYY-MM-DD".  You shall extract this from the transcript, however if it is not explicitly mentioned, you shall set it to None.
+    - start_date: The start date of the action item. It shall be in the format "YYYY-MM-DD". You shall extract this from the transcript, however if it is not explicitly mentioned, you shall set it to None.
     - priority: The priority of the action item. It can be "Lowest", "Low", "Medium", "High" or "Highest". You shall interpret the priority of the action item from the transcript, however if it is not clear, you shall set it to None.
     - labels: The labels of the action item. It can be "Bug", "Feature", "Task", "Story", "Subtask", "Improvement", "Documentation", "Chore", "Refactor", "Test", "Security", "Other". You shall interpret the labels of the action item from the transcript, however if it is not clear, you shall set it to None.
     - project: The project to which the action item belongs. You shall interpret the project of the action item from the transcript, however if it is not clear, you shall set it to None.
