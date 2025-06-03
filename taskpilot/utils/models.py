@@ -1,5 +1,6 @@
 """Data models for TaskPilot application."""
 
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -9,14 +10,14 @@ class ActionItem(BaseModel):
     title: str
     description: str
     assignee: str
-    due_date: str
-    start_date: str
     status: str
-    priority: str
-    labels: list[str]
-    project: str
-    parent: str
-    children: list[str]
+    due_date: Optional[str] = None
+    start_date: Optional[str] = None
+    priority: Optional[str] = None
+    labels: Optional[list[str]] = None
+    project: Optional[str] = None
+    parent: Optional[str] = None
+    children: Optional[list[str]] = None
 
 
 class ActionItemsList(BaseModel):
