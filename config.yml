@@ -1,2 +1,2 @@
 agents:
-  model: "gpt-4.1-mini"
+  model: "o3-mini"
