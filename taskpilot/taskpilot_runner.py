@@ -50,9 +50,8 @@ class TaskPilotRunner:
         :param meeting_transcript: Text content of the meeting transcript
         :return: List of extracted action items
         """
-        instruction = """"""
         result = await Runner.run(
-            self.action_items_extractor, input=instruction, context=meeting_transcript
+            self.action_items_extractor, input=meeting_transcript
         )
         final_output = result.final_output_as(ActionItemsList)
         return final_output
