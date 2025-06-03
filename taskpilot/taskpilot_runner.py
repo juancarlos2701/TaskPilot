@@ -34,6 +34,13 @@ class TaskPilotRunner:
         )
 
         with trace("TaskPilot run", trace_id=trace_id):
+
+            # TODO: Flow shall be changed to the following:
+            # 1. Get existing projects and action items (from Jira, Notion, etc.)
+            # 2. Provide existing projects and action items to ActionItemsExtractor for it to extract action items corresponding to existing projects and action items.
+            # 3. Provide the extracted action items to TicketsCreator for it to create tickets.
+            # 4. Return summary of actions from the TicketsCreator eg. which tickets were created, which tickets and projects were updated, which tickets were deleted.
+
             # 1. Extract action items from meeting transcript
             action_items = await self._extract_action_items(meeting_transcript)
 
