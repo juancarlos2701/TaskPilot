@@ -9,21 +9,34 @@ class AgentsConfig(BaseModel):
     """
     Configurations for agents.
     """
+
     model: str
+
+
+class JiraConfig(BaseModel):
+    """
+    Configurations for Jira integration.
+    """
+
+    url_rest_api: str
+    user: str
 
 
 class ConfigModel(BaseModel):
     """
     Configuration model for TaskPilot.
     """
+
     agents: AgentsConfig
+    jira: JiraConfig
+
 
 class Config:
     """
     Singleton configuration manager for TaskPilot.
     """
 
-    _instance: ConfigModel = None
+    _instance: ConfigModel | None = None
 
     @classmethod
     def load(cls, path: str = "config.yml") -> None:
