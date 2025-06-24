@@ -11,11 +11,11 @@ class ActionItem(BaseModel):
     description: str
     assignee: str
     status: str
+    issuetype: str
+    project: str = "TASKP"  # TODO: this needs to be changed. It shall be retrieved at some point.
     due_date: Optional[str] = None
     start_date: Optional[str] = None
     priority: Optional[str] = None
-    labels: Optional[list[str]] = None
-    project: Optional[str] = None
     parent: Optional[str] = None
     children: Optional[list[str]] = None
 
