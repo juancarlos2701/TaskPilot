@@ -14,7 +14,8 @@ def create_jira_issue(action_item: ActionItem) -> str:
     :returns: A message indicating success or error.
     """
     response = create_issue(
-        project_key=action_item.project,
+        # project_key=action_item.project,
+        project_key="TASKP",  # TODO: this needs to be changed. It shall be retrieved at some point.
         title=action_item.title,
         description=action_item.description,
         issuetype=action_item.issuetype,

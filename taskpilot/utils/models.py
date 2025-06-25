@@ -26,7 +26,7 @@ class ActionItem(BaseModel):
     assignee: str
     status: str
     issuetype: str
-    project: str = "TASKP"  # TODO: this needs to be changed. It shall be retrieved at some point.
+    project: Optional[str] = None
     due_date: Optional[str] = None
     start_date: Optional[str] = None
     priority: Optional[str] = None
