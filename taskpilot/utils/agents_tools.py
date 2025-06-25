@@ -26,6 +26,6 @@ def create_jira_issue(action_item: ActionItem) -> str:
     )
 
     if response.ok:
-        return f"Successfully created the following issue: {response.text}"
+        return f"Successfully created the issue. Response message: {response.text}"
     else:
-        return f"There was an error trying to create an issue. Error message was: {response.text}"
+        return f"There was an error trying to create the issue. Error message: {response.text}"
