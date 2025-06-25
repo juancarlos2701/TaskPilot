@@ -4,7 +4,7 @@ and ticket creation pipeline."""
 from agents import Runner, trace, gen_trace_id
 from agents.result import RunResult
 from local_agents import create_action_items_agent, create_tickets_creator_agent
-from utils.models import ActionItemsList
+from utils.models import ActionItemsList, CreateIssuesResponse
 
 
 class TaskPilotRunner:
@@ -20,7 +20,7 @@ class TaskPilotRunner:
         self.action_items_extractor = create_action_items_agent()
         self.tickets_creator = create_tickets_creator_agent()
 
-    async def run(self, meeting_transcript: str) -> RunResult:
+    async def run(self, meeting_transcript: str) -> None:
         """
         Process a meeting transcript to extract action items and create tickets.
 
@@ -45,10 +45,10 @@ class TaskPilotRunner:
             action_items = await self._extract_action_items(meeting_transcript)
 
             # 2. Create tickets from action items
-            tickets = await self._create_tickets(action_items)
+            tickets_creation_response = await self._create_tickets(action_items)
 
             # 3. Return the results
-            # TODO: Return the results
+            print(tickets_creation_response.text)
 
     async def _extract_action_items(self, meeting_transcript: str) -> ActionItemsList:
         """
@@ -63,15 +63,15 @@ class TaskPilotRunner:
         final_output = result.final_output_as(ActionItemsList)
         return final_output
 
-    async def _create_tickets(self, action_items: ActionItemsList) -> str:
+    async def _create_tickets(self, action_items: ActionItemsList) -> CreateIssuesResponse:
         """
         Create tickets from the extracted action items using an AI agent.
 
         :param action_items: List of action items to convert into tickets
         :return: String representation of created tickets
         """
-        instruction = """"""
         result = await Runner.run(
-            self.tickets_creator, input=instruction, context=action_items
+            self.tickets_creator, input=str(action_items)
         )
-        return result.final_output_as(str)
+        final_output = result.final_output_as(CreateIssuesResponse)
+        return final_output
