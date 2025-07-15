@@ -20,6 +20,7 @@ class JiraConfig(BaseModel):
 
     url_rest_api: str
     user: str
+    request_timeout: int
 
 
 class ConfigModel(BaseModel):

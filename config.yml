@@ -3,3 +3,4 @@ agents:
 jira:
   url_rest_api: "https://juanpersonal.atlassian.net/rest/api/3/"
   user: "juancarlos.suarez@selleco.com.co"
+  request_timeout: 30

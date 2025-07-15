@@ -79,6 +79,6 @@ def create_issue(
         data=json.dumps(payload),
         headers=headers,
         auth=JIRA_AUTH,
-        timeout=30,  # 30 seconds timeout
+        timeout=Config.get().jira.request_timeout,
     )
     return response
