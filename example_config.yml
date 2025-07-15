@@ -1,0 +1,6 @@
+agents:
+  model: "o4-mini"
+jira:
+  url_rest_api: "https://your-domain.atlassian.net/rest/api/3/"
+  user: "your-email@example.com"
+  request_timeout: 5
