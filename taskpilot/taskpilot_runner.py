@@ -3,8 +3,9 @@ and ticket creation pipeline."""
 
 from agents import Runner, trace, gen_trace_id
 from agents.result import RunResult
+from agents.mcp import MCPServerStdio
 from local_agents import create_action_items_agent, create_tickets_creator_agent
-from utils.models import ActionItemsList, CreateIssuesResponse
+from utils.models import ActionItemsList
 
 
 class TaskPilotRunner:
@@ -18,7 +19,7 @@ class TaskPilotRunner:
         Initialize the TaskPilotRunner with required agents.
         """
         self.action_items_extractor = create_action_items_agent()
-        self.tickets_creator = create_tickets_creator_agent()
+        self.tickets_creator = None
 
     async def run(self, meeting_transcript: str) -> None:
         """
@@ -48,7 +49,7 @@ class TaskPilotRunner:
             tickets_creation_response = await self._create_tickets(action_items)
 
             # 3. Return the results
-            print(tickets_creation_response.text)
+            print(tickets_creation_response)
 
     async def _extract_action_items(self, meeting_transcript: str) -> ActionItemsList:
         """
@@ -63,15 +64,40 @@ class TaskPilotRunner:
         final_output = result.final_output_as(ActionItemsList)
         return final_output
 
-    async def _create_tickets(self, action_items: ActionItemsList) -> CreateIssuesResponse:
+    async def _create_tickets(self, action_items: ActionItemsList) -> str:
         """
         Create tickets from the extracted action items using an AI agent.
 
         :param action_items: List of action items to convert into tickets
         :return: String representation of created tickets
         """
-        result = await Runner.run(
-            self.tickets_creator, input=str(action_items)
+
+        jira_mcp_server = MCPServerStdio(
+            params={
+                "command": "docker",
+                "args": [
+                    "run",
+                    "--rm",
+                    "-i",
+                    "--env-file",
+                    "C:\\Users\\Juan Carlos\\Documents\\CodingProjects\\jira-mcp-server\\.env",
+                    "-v",
+                    "C:\\Users\\Juan Carlos\\Documents\\CodingProjects\\TaskPilot\\taskpilot\\logs:/app/logs",
+                    "jira-mcp-server"
+                ]
+            },
+            client_session_timeout_seconds=20,
         )
-        final_output = result.final_output_as(CreateIssuesResponse)
+
+        async with jira_mcp_server as server:
+            print("Jira MCP Server connected. Creating TicketsCreator agent...")
+            self.tickets_creator = create_tickets_creator_agent(mcp_servers=[server])
+
+            result = await Runner.run(
+                self.tickets_creator, input=str(action_items)
+            )
+
+            final_output = result.final_output_as(str)
+        print("Jira MCP Server disconnected.")
+
         return final_output
