@@ -1,30 +1,25 @@
 """Agent implementation for creating tickets from action items."""
 
 from agents import Agent
+from agents.mcp import MCPServer
 from utils.config_parser import Config
-from utils.agents_tools import create_jira_issue
-from utils.models import CreateIssuesResponse
+# from utils.models import TicketsCreatorResponse
 
+# TODO: update Prompt to tell agent how to use the MCP-server
 AGENT_PROMPT = """
-You are an assistant that creates Jira issues given action items.
+You are an assistant that helps by taking actions in Jira. You can take actions in jira using the jira-mcp-server like creating new issues, updating issues, adding comments to issues and more.
 
-You will be given a list of action items and for each action item you shall create a Jira issue using the `create_jira_issue` tool.
+You will be given a list of action items and for each action item you shall evaluate what to do in jira. Decide if given action item already has a corresponding issue in any project which needs to be updated, whether a comment shall be added to it, whether its status shall be updated or if there is no corresponding issue create an issue for the action item. For this you shall use the tools provided on the jira-mcp-server.
 
-You shall collect the responses of the `create_jira_issue` tool and return them as the provided type `CreateIssuesResponse` which contains:
-    - action_items: list containing the action_items that were provided to you
-    - error_messages: list containing the error messages returned by the `create_jira_issue` tool whenever there was an error trying to create the issue.
-    - success_messages: list containing the response messages returned by the `create_jira_issue` tool whenever the issue creation was successful.
-    - text: A text that summarizes the result of the tickets creation. It shall be a string created as following: 
-        f"From the {len(action_items)} action items provided {len(success_messages)} were successfully created in the Jira project.\n {len(error_messages)} failed to be created in the Jira project.\n\nError messages:\n{error_messages}"
+You shall summarize your actions in a small text.
 """
 
 
-def create_tickets_creator_agent() -> Agent:
+def create_tickets_creator_agent(mcp_servers: list[MCPServer]) -> Agent:
     """Create an agent that creates tickets given action items."""
     return Agent(
         name="Tickets Creator",
         instructions=AGENT_PROMPT,
-        tools=[create_jira_issue],
+        mcp_servers=mcp_servers,
         model=Config.get().agents.model,
-        output_type=CreateIssuesResponse
     )
