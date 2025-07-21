@@ -4,6 +4,7 @@ from agents import Agent
 from utils.config_parser import Config
 from utils.models import ActionItemsList
 
+# TODO: ActionItems shall now also be actions such as adding a comment to an issue, updating existing issues...
 AGENT_PROMPT = """
 Your are an assistant to extract action items from a meeting transcript.
 

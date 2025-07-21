@@ -40,7 +40,7 @@ class ActionItemsList(BaseModel):
     action_items: list[ActionItem]
 
 
-class CreateIssuesResponse(BaseModel):
+class TicketsCreatorResponse(BaseModel):
     """
     Represents the response returned by the TicketsCreator Agent after attempting to create issues.
 
@@ -51,6 +51,7 @@ class CreateIssuesResponse(BaseModel):
     :param success_messages: A list of success messages for action items for which tickets were successfully created.
     :param text: A summary string describing the overall result of the ticket creation process, including counts of successes and failures and a summary of error messages.
     """
+    # TODO: update to provide summary of what the agent did: created issues, comments written, issues updated...
     action_items: list[ActionItem]
     error_messages: list[str]
     success_messages: list[str]
